@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+       <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <title>Hello World</title>
+    </head>
+    <body>
+ <ons-page>
+  
+<ons-toolbar>
+    <div class="center"><label>Me Inventory</label></div>
+  </ons-toolbar>
+  </ons-toolbar>
+  <ons-tabbar swipeable position="auto">
+    <ons-tab page="tab1.html" label="View" active>
+    </ons-tab>
+    <ons-tab page="tab2.html" label="Add">
+    </ons-tab>
+ <ons-tab page="tab3.html" label="In">
+    </ons-tab>
+    <ons-tab page="tab4.html" label="Out">
+    </ons-tab>
+   <ons-tab page="tab5.html" label="TX">
+    </ons-tab>
+  </ons-tabbar>
+</ons-page>
+<template id="tab1.html">
+  <ons-page   id="Tab1">
+    <h3 style="text-align: center;">
+     All Items
+	 <div id="grid_view"></div>
+    </h3>
+  </ons-page>
+</template>
+<template id="tab5.html">
+  <ons-page id="Tab5">
+    <h3 style="text-align: center;">
+      Transactions
+    </h3>
+  </ons-page>
+</template>
+<template id="tab2.html">
+  <ons-page id="Tab2">
+ 
+     <h3 style="text-align: center;">Add Item</h3>
+   <div style=" margin: 10px;">
+    <p>
+     <label for="name">Name*:</label>
+      <ons-input id="name"  placeholder="Name" style="width: 100%" ></ons-input>
+    </p>
+   <p>
+   <label for="code">Barcode*:</label>
+      <ons-input id="code" placeholder="Code" style="width: 100%"></  ons-input>
+     </p>
+	 <p>
+    <label for="location">Location*:</label>
+      <ons-input id="location" placeholder="location" style="width: 100%"></  ons-input>
+    </p>
+  <p>
+   <label for="qtyReceived">Qty Received*:</label>
+      <ons-input id="qtyR" placeholder="Qty Received" style="width: 100%"></  ons-input>
+   </p>
+     </p>
+        <ons-button onclick="showMoreFields()"><label>Show More Fields</label></ons-button>
+    <p>
+   <div style="display:none" id="showMore">
+    <p>
+    <label for="lot">Lot:</label>
+      <ons-input id="lot" placeholder="Lot" style="width: 100%"></  ons-input>
+    </p>
+      <p>
+    <label for="expiration">Expiration Date:</label>
+      <ons-input id="expiration" placeholder="Expiration Date" style="width: 100%"></  ons-input>
+    </p>
+      <p>
+    <label for="manufacturers">Manufacturers:</label>
+      <ons-input id="manufact" placeholder="Manufacturers" style="width: 100%"></  ons-input>
+    </p>
+     <p>
+     <label for="buyingprice">Buying Price:</label>
+      <ons-input id="price" placeholder="Buying Price" style="width: 100%"></  ons-input>
+    </p>
+    <p>
+    <label for="sellingprice">Selling Price:</label>
+      <ons-input id="sell" placeholder="Selling Price" style="width: 100%"></  ons-input>
+    </p>
+    <p>
+    <label for="discountprice">Discount Price:</label>
+      <ons-input id="disprice" placeholder="Discount Price" style="width: 100%"></  ons-input>
+    </p>
+    <p>
+    <label for="discountRate">Discount Rate:</label>
+      <ons-input id="disrate" placeholder="Discount Rate" style="width: 100%"></  ons-input>
+    </p>
+   <p>
+   <label for="category">Category:</label>
+      <ons-input id="cate" placeholder="Category" style="width: 100%"></  ons-input>
+   </p>
+    <p>
+   <label for="upc">UPC:</label>
+      <ons-input id="upc" placeholder="UPC" style="width: 100%"></  ons-input>
+   </p>
+    <p>
+   <label for="sku">SKU:</label>
+      <ons-input id="sku" placeholder="SKU" style="width: 100%"></  ons-input>
+   </p>
+     <p>
+   <label for="serial">Serial #:</label>
+      <ons-input id="serialNum" placeholder="Serial" style="width: 100%"></  ons-input>
+   </p>
+
+    <p>
+   <label for="qtyStock">Qty In Stock:</label>
+      <ons-input id="qtyStock" placeholder="Qty In Stock" style="width: 100%"></  ons-input>
+   </p>
+   <p>
+   <label for="qtySold">Qty Sold:</label>
+      <ons-input id="qtySold" placeholder="Qty Sold" style="width: 100%"></  ons-input>
+   </p>
+   <p>
+   <label for="alert">Alert QTY Level:</label>
+      <ons-input id="alert" placeholder="Level" style="width: 100%"></  ons-input>
+   </p>
+   <p>
+   <label for="reorderLevel">Reorder Level:</label>
+      <ons-input id="reorderLevel" placeholder="Reorder Level" style="width: 100%"></  ons-input>
+   </p>
+    <p>
+   <label for="active">Active: </label>
+      <ons-radio name="group" value="Yes">Yes</ons-radio>
+      <ons-radio name="group" value="No">No</ons-radio>
+   </p>
+  <p>
+   <label for="partNumber">Part #:</label>
+      <ons-input id="partNum" placeholder="Part Number" style="width: 100%"></  ons-input>
+   </p>
+  <p>
+   <label for="partName">Part Name:</label>
+      <ons-input id="partNam" placeholder="Part Name" style="width: 100%"></  ons-input>
+   </p>
+   <p>
+   <label for="StockNumber">Stock Number:</label>
+      <ons-input id="stockNum" placeholder="Stock Number" style="width: 100%"></  ons-input>
+   </p>
+   <p>
+   <label for="condition">Condition:</label>
+      <ons-input id="cond" placeholder="Condition" style="width: 100%"></  ons-input>
+   </p>
+  <p>
+  <label for="highlight">Item highlight color:</label>
+  <br>
+  <ons-select id="choose-color" onchange="editSelects(event)">
+    <option value="1">Default</option>
+    <option value="2">Red</option>
+    <option value="3">Yellow</option>
+    <option value="4">Green</option>
+    <option value="5">Orange</option>
+  </ons-select>
+  </p>
+  <p>
+   <label for="country">Country of Orig:</label>
+  <ons-select id="choose-country" onchange="editSelects(event)">
+  <option value="AF">Afghanistan</option>
+	<option value="AX">Åland Islands</option>
+	<option value="AL">Albania</option>
+	<option value="DZ">Algeria</option>
+	<option value="AS">American Samoa</option>
+	<option value="AD">Andorra</option>
+	<option value="AO">Angola</option>
+	<option value="AI">Anguilla</option>
+	<option value="AQ">Antarctica</option>
+	<option value="AG">Antigua and Barbuda</option>
+	<option value="AR">Argentina</option>
+	<option value="AM">Armenia</option>
+	<option value="AW">Aruba</option>
+	<option value="AU">Australia</option>
+	<option value="AT">Austria</option>
+	<option value="AZ">Azerbaijan</option>
+	<option value="BS">Bahamas</option>
+	<option value="BH">Bahrain</option>
+	<option value="BD">Bangladesh</option>
+	<option value="BB">Barbados</option>
+	<option value="BY">Belarus</option>
+	<option value="BE">Belgium</option>
+	<option value="BZ">Belize</option>
+	<option value="BJ">Benin</option>
+	<option value="BM">Bermuda</option>
+	<option value="BT">Bhutan</option>
+	<option value="BO">Bolivia, Plurinational State of</option>
+	<option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+	<option value="BA">Bosnia and Herzegovina</option>
+	<option value="BW">Botswana</option>
+	<option value="BV">Bouvet Island</option>
+	<option value="BR">Brazil</option>
+	<option value="IO">British Indian Ocean Territory</option>
+	<option value="BN">Brunei Darussalam</option>
+	<option value="BG">Bulgaria</option>
+	<option value="BF">Burkina Faso</option>
+	<option value="BI">Burundi</option>
+	<option value="KH">Cambodia</option>
+	<option value="CM">Cameroon</option>
+	<option value="CA">Canada</option>
+	<option value="CV">Cape Verde</option>
+	<option value="KY">Cayman Islands</option>
+	<option value="CF">Central African Republic</option>
+	<option value="TD">Chad</option>
+	<option value="CL">Chile</option>
+	<option value="CN">China</option>
+	<option value="CX">Christmas Island</option>
+	<option value="CC">Cocos (Keeling) Islands</option>
+	<option value="CO">Colombia</option>
+	<option value="KM">Comoros</option>
+	<option value="CG">Congo</option>
+	<option value="CD">Congo, the Democratic Republic of the</option>
+	<option value="CK">Cook Islands</option>
+	<option value="CR">Costa Rica</option>
+	<option value="CI">Côte d'Ivoire</option>
+	<option value="HR">Croatia</option>
+	<option value="CU">Cuba</option>
+	<option value="CW">Curaçao</option>
+	<option value="CY">Cyprus</option>
+	<option value="CZ">Czech Republic</option>
+	<option value="DK">Denmark</option>
+	<option value="DJ">Djibouti</option>
+	<option value="DM">Dominica</option>
+	<option value="DO">Dominican Republic</option>
+	<option value="EC">Ecuador</option>
+	<option value="EG">Egypt</option>
+	<option value="SV">El Salvador</option>
+	<option value="GQ">Equatorial Guinea</option>
+	<option value="ER">Eritrea</option>
+	<option value="EE">Estonia</option>
+	<option value="ET">Ethiopia</option>
+	<option value="FK">Falkland Islands (Malvinas)</option>
+	<option value="FO">Faroe Islands</option>
+	<option value="FJ">Fiji</option>
+	<option value="FI">Finland</option>
+	<option value="FR">France</option>
+	<option value="GF">French Guiana</option>
+	<option value="PF">French Polynesia</option>
+	<option value="TF">French Southern Territories</option>
+	<option value="GA">Gabon</option>
+	<option value="GM">Gambia</option>
+	<option value="GE">Georgia</option>
+	<option value="DE">Germany</option>
+	<option value="GH">Ghana</option>
+	<option value="GI">Gibraltar</option>
+	<option value="GR">Greece</option>
+	<option value="GL">Greenland</option>
+	<option value="GD">Grenada</option>
+	<option value="GP">Guadeloupe</option>
+	<option value="GU">Guam</option>
+	<option value="GT">Guatemala</option>
+	<option value="GG">Guernsey</option>
+	<option value="GN">Guinea</option>
+	<option value="GW">Guinea-Bissau</option>
+	<option value="GY">Guyana</option>
+	<option value="HT">Haiti</option>
+	<option value="HM">Heard Island and McDonald Islands</option>
+	<option value="VA">Holy See (Vatican City State)</option>
+	<option value="HN">Honduras</option>
+	<option value="HK">Hong Kong</option>
+	<option value="HU">Hungary</option>
+	<option value="IS">Iceland</option>
+	<option value="IN">India</option>
+	<option value="ID">Indonesia</option>
+	<option value="IR">Iran, Islamic Republic of</option>
+	<option value="IQ">Iraq</option>
+	<option value="IE">Ireland</option>
+	<option value="IM">Isle of Man</option>
+	<option value="IL">Israel</option>
+	<option value="IT">Italy</option>
+	<option value="JM">Jamaica</option>
+	<option value="JP">Japan</option>
+	<option value="JE">Jersey</option>
+	<option value="JO">Jordan</option>
+	<option value="KZ">Kazakhstan</option>
+	<option value="KE">Kenya</option>
+	<option value="KI">Kiribati</option>
+	<option value="KP">Korea, Democratic People's Republic of</option>
+	<option value="KR">Korea, Republic of</option>
+	<option value="KW">Kuwait</option>
+	<option value="KG">Kyrgyzstan</option>
+	<option value="LA">Lao People's Democratic Republic</option>
+	<option value="LV">Latvia</option>
+	<option value="LB">Lebanon</option>
+	<option value="LS">Lesotho</option>
+	<option value="LR">Liberia</option>
+	<option value="LY">Libya</option>
+	<option value="LI">Liechtenstein</option>
+	<option value="LT">Lithuania</option>
+	<option value="LU">Luxembourg</option>
+	<option value="MO">Macao</option>
+	<option value="MK">Macedonia, the former Yugoslav Republic of</option>
+	<option value="MG">Madagascar</option>
+	<option value="MW">Malawi</option>
+	<option value="MY">Malaysia</option>
+	<option value="MV">Maldives</option>
+	<option value="ML">Mali</option>
+	<option value="MT">Malta</option>
+	<option value="MH">Marshall Islands</option>
+	<option value="MQ">Martinique</option>
+	<option value="MR">Mauritania</option>
+	<option value="MU">Mauritius</option>
+	<option value="YT">Mayotte</option>
+	<option value="MX">Mexico</option>
+	<option value="FM">Micronesia, Federated States of</option>
+	<option value="MD">Moldova, Republic of</option>
+	<option value="MC">Monaco</option>
+	<option value="MN">Mongolia</option>
+	<option value="ME">Montenegro</option>
+	<option value="MS">Montserrat</option>
+	<option value="MA">Morocco</option>
+	<option value="MZ">Mozambique</option>
+	<option value="MM">Myanmar</option>
+	<option value="NA">Namibia</option>
+	<option value="NR">Nauru</option>
+	<option value="NP">Nepal</option>
+	<option value="NL">Netherlands</option>
+	<option value="NC">New Caledonia</option>
+	<option value="NZ">New Zealand</option>
+	<option value="NI">Nicaragua</option>
+	<option value="NE">Niger</option>
+	<option value="NG">Nigeria</option>
+	<option value="NU">Niue</option>
+	<option value="NF">Norfolk Island</option>
+	<option value="MP">Northern Mariana Islands</option>
+	<option value="NO">Norway</option>
+	<option value="OM">Oman</option>
+	<option value="PK">Pakistan</option>
+	<option value="PW">Palau</option>
+	<option value="PS">Palestinian Territory, Occupied</option>
+	<option value="PA">Panama</option>
+	<option value="PG">Papua New Guinea</option>
+	<option value="PY">Paraguay</option>
+	<option value="PE">Peru</option>
+	<option value="PH">Philippines</option>
+	<option value="PN">Pitcairn</option>
+	<option value="PL">Poland</option>
+	<option value="PT">Portugal</option>
+	<option value="PR">Puerto Rico</option>
+	<option value="QA">Qatar</option>
+	<option value="RE">Réunion</option>
+	<option value="RO">Romania</option>
+	<option value="RU">Russian Federation</option>
+	<option value="RW">Rwanda</option>
+	<option value="BL">Saint Barthélemy</option>
+	<option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+	<option value="KN">Saint Kitts and Nevis</option>
+	<option value="LC">Saint Lucia</option>
+	<option value="MF">Saint Martin (French part)</option>
+	<option value="PM">Saint Pierre and Miquelon</option>
+	<option value="VC">Saint Vincent and the Grenadines</option>
+	<option value="WS">Samoa</option>
+	<option value="SM">San Marino</option>
+	<option value="ST">Sao Tome and Principe</option>
+	<option value="SA">Saudi Arabia</option>
+	<option value="SN">Senegal</option>
+	<option value="RS">Serbia</option>
+	<option value="SC">Seychelles</option>
+	<option value="SL">Sierra Leone</option>
+	<option value="SG">Singapore</option>
+	<option value="SX">Sint Maarten (Dutch part)</option>
+	<option value="SK">Slovakia</option>
+	<option value="SI">Slovenia</option>
+	<option value="SB">Solomon Islands</option>
+	<option value="SO">Somalia</option>
+	<option value="ZA">South Africa</option>
+	<option value="GS">South Georgia and the South Sandwich Islands</option>
+	<option value="SS">South Sudan</option>
+	<option value="ES">Spain</option>
+	<option value="LK">Sri Lanka</option>
+	<option value="SD">Sudan</option>
+	<option value="SR">Suriname</option>
+	<option value="SJ">Svalbard and Jan Mayen</option>
+	<option value="SZ">Swaziland</option>
+	<option value="SE">Sweden</option>
+	<option value="CH">Switzerland</option>
+	<option value="SY">Syrian Arab Republic</option>
+	<option value="TW">Taiwan, Province of China</option>
+	<option value="TJ">Tajikistan</option>
+	<option value="TZ">Tanzania, United Republic of</option>
+	<option value="TH">Thailand</option>
+	<option value="TL">Timor-Leste</option>
+	<option value="TG">Togo</option>
+	<option value="TK">Tokelau</option>
+	<option value="TO">Tonga</option>
+	<option value="TT">Trinidad and Tobago</option>
+	<option value="TN">Tunisia</option>
+	<option value="TR">Turkey</option>
+	<option value="TM">Turkmenistan</option>
+	<option value="TC">Turks and Caicos Islands</option>
+	<option value="TV">Tuvalu</option>
+	<option value="UG">Uganda</option>
+	<option value="UA">Ukraine</option>
+	<option value="AE">United Arab Emirates</option>
+	<option value="GB">United Kingdom</option>
+	<option value="US">United States</option>
+	<option value="UM">United States Minor Outlying Islands</option>
+	<option value="UY">Uruguay</option>
+	<option value="UZ">Uzbekistan</option>
+	<option value="VU">Vanuatu</option>
+	<option value="VE">Venezuela, Bolivarian Republic of</option>
+	<option value="VN">Viet Nam</option>
+	<option value="VG">Virgin Islands, British</option>
+	<option value="VI">Virgin Islands, U.S.</option>
+	<option value="WF">Wallis and Futuna</option>
+	<option value="EH">Western Sahara</option>
+	<option value="YE">Yemen</option>
+	<option value="ZM">Zambia</option>
+	<option value="ZW">Zimbabwe</option>
+</ons-select>
+  <p>
+   <label for="unitType">Unit Type:</label>
+      <ons-input id="unitType" placeholder="Unit Type" style="width: 100%"></  ons-input>
+  </p>
+  <p>
+   <label for="serviceFee">Service Fee:</label>
+      <ons-input id="serviceFee" placeholder="Service Fee" style="width: 100%"></  ons-input>
+  </p>
+  <p>
+   <label for="dept">Dept:</label>
+      <ons-input id="dept" placeholder="Dept" style="width: 100%"></  ons-input>
+  </p>
+  <p>
+   <label for="shelf">Shelf:</label>
+      <ons-input id="shelf" placeholder="Shelf" style="width: 100%"></  ons-input>
+  </p>
+   <p>
+   <label for="Bulk">Bulk:</label>
+      <ons-input id="bulk" placeholder="Bulk" style="width: 100%"></  ons-input>
+  </p>
+   <p>
+   <label for="Weight">Weight:</label>
+      <ons-input id="weight" placeholder="Weight" style="width: 100%"></  ons-input>
+  </p>
+  <p>
+   <label for="Length">Length:</label>
+      <ons-input id="length" placeholder="Length" style="width: 100%"></  ons-input>
+  </p>
+  <p>
+   <label for="Width">Width:</label>
+      <ons-input id="width" placeholder="Width" style="width: 100%"></  ons-input>
+  </p>
+   <p>
+   <label for="Heigth">Heigth:</label>
+      <ons-input id="heigth" placeholder="Height" style="width: 100%"></  ons-input>
+  </p>
+  <p>
+   <label for="bottlesize">Format/Bottle Size:</label>
+      <ons-input id="bottle" placeholder="Bottle Size" style="width: 100%"></  ons-input>
+  </p>
+   <p>
+   <label for="Size">Size:</label>
+      <ons-input id="size" placeholder="Size" style="width: 100%"></  ons-input>
+  </p>
+  <p>
+   <label for="description">Description:</label>
+      <ons-input id="des" placeholder="Description" style="width: 100%"></  ons-input>
+   </p>
+   </div>
+       <p style="margin-top: 20px;text-align: center;">
+      <ons-button onclick="saveItem()"><label>Ok</label></ons-button>
+      <ons-button onclick="notify()" style="background-color:red"><label>Cancel</label></ons-button>
+    </p>
+  </div>
+  </ons-page>
+</template>
+<template id="tab3.html">
+  <ons-page id="Tab3">
+   <h3 style="text-align: center;">Check-In Item</h3>
+    <p style="margin-top: 10px;text-align: center;">
+      <ons-button onclick="login()"><label>Check-In Item</label></ons-button>
+      <ons-button onclick="notify()" style="background-color:red"><label>Cancel</label></ons-button>
+    </p>
+   <div style=" margin: 10px;">
+   <p>
+     <label for="code">Barcode:</label>
+      <ons-input id="code" placeholder="Code" style="width: 100%" ></  ons-input>
+   </p>
+        <ons-button onclick="login()" style="background-color:green"><label>Scan barcode</label></ons-button>
+
+   <p>
+     <label for="name">Name:</label>
+      <ons-input id="name"  placeholder="Name" style="width: 100%" disabled></ons-input>
+    </p>
+    <p>
+    <label for="location">Location:</label>
+      <ons-input id="location" placeholder="location" style="width: 100%" disabled ></  ons-input>
+    </p>
+     <p>
+     <label for="buyingprice">Buying Price:</label>
+      <ons-input id="price" placeholder="Buying Price" style="width: 100%" disabled ></  ons-input>
+    </p>
+    <p>
+    <label for="sellingprice">Selling Price:</label>
+      <ons-input id="sell" placeholder="Selling Price" style="width: 100%" disabled ></  ons-input>
+    </p>
+   <p>
+   <label for="category">Category:</label>
+      <ons-input id="cate" placeholder="Category" style="width: 100%" disabled ></  ons-input>
+   </p>
+     <p>
+   <label for="qtyReceived">Qty Received:</label>
+      <ons-input id="qtyR" placeholder="Qty Received" style="width: 100%" disabled ></  ons-input>
+   </p>
+    <p>
+   <label for="qtyStock">Qty In Stock:</label>
+      <ons-input id="qtyStock" placeholder="Qty In Stock" style="width: 100%" disabled ></  ons-input>
+   </p>
+   <p>
+   <label for="qtySold">Qty Sold:</label>
+      <ons-input id="qtySold" placeholder="Qty Sold" style="width: 100%" disabled > </  ons-input>
+   </p>
+  </div>
+  </ons-page>
+</template>
+<template id="tab4.html">
+  <ons-page id="Tab4">
+   <h3 style="text-align: center;">Check-Out Item</h3>
+   <p style="margin-top: 10px;text-align: center;">
+      <ons-button onclick="login()"><label>Check-Out Item</label></ons-button>
+      <ons-button onclick="notify()" style="background-color:red"><label>Cancel</label></ons-button>
+    </p>
+   <div style=" margin: 10px;">
+       <p>
+        <label for="code">Barcode:</label>
+      <ons-input id="code" placeholder="Code" style="width: 100%" ></  ons-input>
+     </p>
+        <ons-button onclick="login()" style="background-color:green"><label>Scan barcode</label></ons-button>
+
+     <p>
+     <label for="name">Name:</label>
+      <ons-input id="name"  placeholder="Name" style="width: 100%" disabled></ons-input>
+    </p>
+    <p>
+    <label for="location">Location:</label>
+      <ons-input id="location" placeholder="location" style="width: 100%" disabled ></  ons-input>
+    </p>
+     <p>
+     <label for="buyingprice">Buying Price:</label>
+      <ons-input id="price" placeholder="Buying Price" style="width: 100%" disabled ></  ons-input>
+    </p>
+    <p>
+    <label for="sellingprice">Selling Price:</label>
+      <ons-input id="sell" placeholder="Selling Price" style="width: 100%" disabled ></  ons-input>
+    </p>
+   <p>
+   <label for="category">Category:</label>
+      <ons-input id="cate" placeholder="Category" style="width: 100%" disabled ></  ons-input>
+   </p>
+     <p>
+   <label for="qtyReceived">Qty Received:</label>
+      <ons-input id="qtyR" placeholder="Qty Received" style="width: 100%" disabled ></  ons-input>
+   </p>
+    <p>
+   <label for="qtyStock">Qty In Stock:</label>
+      <ons-input id="qtyStock" placeholder="Qty In Stock" style="width: 100%" disabled ></  ons-input>
+   </p>
+   <p>
+   <label for="qtySold">Qty Sold:</label>
+      <ons-input id="qtySold" placeholder="Qty Sold" style="width: 100%" disabled > </  ons-input>
+   </p>
+  </div>
+  </ons-page>
+</template>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
